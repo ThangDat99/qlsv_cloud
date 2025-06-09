@@ -1,0 +1,53 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Thêm Lớp</h2>
+        <form action="/lop/them" method="POST">
+            <div class="mb-3">
+                <label for="tenLop" class="form-label">Tên lớp</label>
+                <input type="text" id="tenLop" name="tenLop" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select id="khoa" name="khoa" class="form-select" required>
+                    <% khoas.forEach(khoa=> { %>
+                        <option value="<%= khoa._id %>">
+                            <%= khoa.tenKhoa %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="nganh" class="form-label">Ngành</label>
+                <select id="nganh" name="nganh" class="form-select" required>
+                    <option value="">-- Chọn ngành --</option>
+                    <% nganhs.forEach(function(nganh) { %>
+                        <option value="<%= nganh._id %>" <%=lop.nganh && lop.nganh.toString()===nganh._id.toString()
+                            ? 'selected' : '' %>>
+                            <%= nganh.tenNganh %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="khoaHoc" class="form-label">Khoá học</label>
+                <select id="khoaHoc" name="khoaHoc" class="form-select" required>
+                    <% khoahocs.forEach(kh=> { %>
+                        <option value="<%= kh._id %>">
+                            <%= kh.tenKhoaHoc %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Thêm</button>
+            <a href="/lop" class="btn btn-secondary">Hủy</a>
+        </form>
+
+    </div>
+
+    <%- include('footer') %>

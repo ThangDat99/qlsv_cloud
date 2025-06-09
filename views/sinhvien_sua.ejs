@@ -1,0 +1,114 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Sửa thông tin sinh viên</h2>
+        <form action="/sinhvien/sua/<%= sinhvien._id %>" method="POST" class="mt-4">
+
+            <div class="mb-3">
+                <label for="maSV" class="form-label">Mã sinh viên</label>
+                <input type="text" class="form-control" id="maSV" name="maSV" value="<%= sinhvien.maSV %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="hoTen" class="form-label">Họ và tên</label>
+                <input type="text" class="form-control" id="hoTen" name="hoTen" value="<%= sinhvien.hoTen %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Giới tính</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioiTinh" id="nam" value="Nam"
+                            <%=sinhvien.gioiTinh==='Nam' ? 'checked' : '' %> required>
+                        <label class="form-check-label" for="nam">Nam</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioiTinh" id="nu" value="Nữ"
+                            <%=sinhvien.gioiTinh==='Nữ' ? 'checked' : '' %> required>
+                        <label class="form-check-label" for="nu">Nữ</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ngaySinh" class="form-label">Ngày sinh</label>
+                <input type="date" class="form-control" id="ngaySinh" name="ngaySinh"
+                    value="<%= sinhvien.ngaySinh.toISOString().split('T')[0] %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="diaChi" class="form-label">Địa chỉ</label>
+                <input type="text" class="form-control" id="diaChi" name="diaChi" value="<%= sinhvien.diaChi %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="khoahoc" class="form-label">Khoá học</label>
+                <select id="khoahoc" name="khoaHoc" class="form-select" required>
+                    <option value="">-- Chọn khoá học --</option>
+                    <% khoahocs.forEach(function(kh) { %>
+                        <option value="<%= kh._id %>" <%=(khoaHocId && kh._id.toString()===khoaHocId.toString())
+                            ? 'selected' : '' %>>
+                            <%= kh.tenKhoaHoc %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select id="khoa" name="khoa" class="form-select" required>
+                    <option value="">-- Chọn khoa --</option>
+                    <% khoas.forEach(function(khoa) { %>
+                        <option value="<%= khoa._id %>" <%=sinhvien.khoa &&
+                            sinhvien.khoa.toString()===khoa._id.toString() ? 'selected' : '' %>>
+                            <%= khoa.tenKhoa %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="nganh" class="form-label">Ngành</label>
+                <select id="nganh" name="nganh" class="form-select" required>
+                    <option value="">-- Chọn ngành --</option>
+                    <% nganhs.forEach(function(nganh) { %>
+                        <option value="<%= nganh._id %>" <%=sinhvien.nganh &&
+                            sinhvien.nganh.toString()===nganh._id.toString() ? 'selected' : '' %>>
+                            <%= nganh.tenNganh %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+
+            <!-- LỚP -->
+            <div class="mb-3">
+                <label for="lop" class="form-label">Lớp</label>
+                <select id="lop" name="lop" class="form-select" required>
+                    <option value="">-- Chọn lớp --</option>
+                    <% lops.forEach(function(lop) { %>
+                        <option value="<%= lop._id %>" <%=sinhvien.lop &&
+                            sinhvien.lop._id.toString()===lop._id.toString() ? 'selected' : '' %>>
+                            <%= lop.tenLop %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= sinhvien.email %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="sdt" class="form-label">Số điện thoại</label>
+                <input type="text" class="form-control" id="sdt" name="sdt" value="<%= sinhvien.sdt %>">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a href="/sinhvien" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+
+    <%- include('footer') %>

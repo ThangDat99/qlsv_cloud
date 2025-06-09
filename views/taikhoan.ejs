@@ -1,0 +1,51 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <div class="mb-3">
+            <h2 class="mb-4">Quản lý tài khoản</h2>
+            <%- include('nav')%>
+                <a href="/taikhoan/them" class="btn btn-primary mb-3">➕ Thêm tài khoản</a>
+
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Họ và tên</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Email</th>
+                            <th>Quyền hạn</th>
+                            <th>Kích hoạt</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% accounts.forEach(tk=> { %>
+                            <tr>
+                                <td>
+                                    <%= tk.HoVaTen %>
+                                </td>
+                                <td>
+                                    <%= tk.TenDangNhap %>
+                                </td>
+                                <td>
+                                    <%= tk.Email %>
+                                </td>
+                                <td>
+                                    <%= tk.QuyenHan %>
+                                </td>
+                                <td>
+                                    <% if (tk.KichHoat) { %>
+                                        <span class="badge bg-success">✔</span>
+                                        <% } else { %>
+                                            <span class="badge bg-danger">✖</span>
+                                            <% } %>
+                                </td>
+                                <td>
+                                    <a href="/taikhoan/sua/<%= tk._id %>" class="btn btn-sm btn-warning">✏️ Sửa</a>
+                                    <a href="/taikhoan/xoa/<%= tk._id %>" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?')">🗑️ Xóa</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+        </div>
+        <%- include('footer') %>

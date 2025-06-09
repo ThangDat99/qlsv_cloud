@@ -1,0 +1,148 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <a href="/sinhvien" class="btn btn-secondary mt-3">Quay lại danh sách</a>
+        <h3>Điểm học tập: <%= sinhvien.hoTen %> (<%= sinhvien.maSV %>)</h3>
+
+        <% Object.values(diemTheoHocKy).forEach(hkData=> { %>
+            <div class="card my-3">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <span>Học kỳ: <%= hkData.hocKy.tenHocKy %></span>
+                    <a href="/diemmonhoc/them?sinhvienId=<%= sinhvien._id %>&hocKyId=<%= hkData.hocKy._id %>"
+                        class="btn btn-light btn-sm">
+                        <i class="bi bi-plus-circle"></i> Thêm điểm
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <% if (hkData.diem.length===0) { %>
+                        <p>Chưa có điểm.</p>
+                        <% } else { %>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Mã môn học</th>
+                                            <th>Môn học</th>
+                                            <th>Số tín chỉ</th>
+                                            <th>Điểm quá trình</th>
+                                            <th>Điểm thi</th>
+                                            <th>Điểm tổng kết</th>
+                                            <th>GPA</th>
+                                            <th>Điểm chữ</th>
+                                            <th>Xếp loại</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% let tongTinChi=0, tongDiemXTC=0, tongGPA=0; function tinhGPA(diem) { if
+                                            (diem>= 9.0) return 4.0;
+                                            else if (diem >= 8.0) return 3.5;
+                                            else if (diem >= 7.0) return 3.0;
+                                            else if (diem >= 6.0) return 2.5;
+                                            else if (diem >= 5.0) return 2.0;
+                                            else if (diem >= 4.0) return 1.5;
+                                            else if (diem >= 3.0) return 1.0;
+                                            else return 0.0;
+                                            }
+
+                                            function diemChu(diem) {
+                                            if (diem >= 9.0) return 'A+';
+                                            else if (diem >= 8.0) return 'A';
+                                            else if (diem >= 7.0) return 'B+';
+                                            else if (diem >= 6.0) return 'B';
+                                            else if (diem >= 5.0) return 'C';
+                                            else if (diem >= 4.0) return 'D+';
+                                            else if (diem >= 3.0) return 'D';
+                                            else return 'F';
+                                            }
+
+                                            function xepLoai(diem) {
+                                            if (diem >= 9.0) return 'Xuất sắc';
+                                            else if (diem >= 8.0) return 'Giỏi';
+                                            else if (diem >= 7.0) return 'Khá';
+                                            else if (diem >= 6.0) return 'Trung bình khá';
+                                            else if (diem >= 5.0) return 'Trung bình';
+                                            else if (diem >= 4.0) return 'Yếu';
+                                            else if (diem >= 3.0) return 'Kém';
+                                            else return 'Rớt';
+                                            }
+                                            %>
+
+                                            <% hkData.diem.forEach(d=> {
+                                                const soTinChi = d.monHoc.soTinChi;
+                                                const diemTK = d.diemTongKet;
+                                                const gpa = tinhGPA(diemTK);
+                                                const chu = diemChu(diemTK);
+                                                const loai = xepLoai(diemTK);
+
+                                                tongTinChi += soTinChi;
+                                                tongDiemXTC += diemTK * soTinChi;
+                                                tongGPA += gpa * soTinChi;
+                                                %>
+                                                <tr>
+                                                    <td>
+                                                        <%= d.monHoc.maMonHoc %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.monHoc.tenMonHoc %>
+                                                    </td>
+                                                    <td>
+                                                        <%= soTinChi %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.diemQuaTrinh %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.diemThi %>
+                                                    </td>
+                                                    <td>
+                                                        <%= diemTK %>
+                                                    </td>
+                                                    <td>
+                                                        <%= gpa.toFixed(1) %>
+                                                    </td>
+                                                    <td>
+                                                        <%= chu %>
+                                                    </td>
+                                                    <td>
+                                                        <%= loai %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/diemmonhoc/sua/<%= d._id %>"
+                                                            class="btn btn-sm btn-warning">
+                                                            <i class="bi bi-pencil"></i> Sửa
+                                                        </a>
+                                                        <form
+                                                            action="/diemmonhoc/xoa/<%= d._id %>?sinhvienId=<%= sinhvien._id %>&hocKyId=<%= hkData.hocKy._id %>"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Bạn có chắc muốn xóa điểm môn học này?');">
+                                                            <button class="btn btn-sm btn-danger"><i
+                                                                    class="bi bi-trash"></i>Xoá</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+                                                    <!-- Dòng tổng kết -->
+                                                    <tr class="table-warning fw-bold">
+                                                        <td colspan="7" class="text-end">Tổng kết học kỳ</td>
+                                                        <td>
+                                                            <%= tongTinChi ? (tongDiemXTC / tongTinChi).toFixed(2)
+                                                                : '0.00' %>
+                                                        </td>
+                                                        <td>
+                                                            <%= tongTinChi ? (tongGPA / tongTinChi).toFixed(2) : '0.00'
+                                                                %>
+                                                        </td>
+                                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <% } %>
+                </div>
+            </div>
+            <% }) %>
+
+
+    </div>
+    <%- include('footer') %>

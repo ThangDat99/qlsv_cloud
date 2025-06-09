@@ -1,0 +1,92 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Chi tiết sinh viên</h2>
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <td>
+                        <%= sinhvien.maSV %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Họ và tên</th>
+                    <td>
+                        <%= sinhvien.hoTen %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Giới tính</th>
+                    <td>
+                        <%= sinhvien.gioiTinh %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ngày sinh</th>
+                    <td>
+                        <%= sinhvien.ngaySinh.toLocaleDateString('vi-VN') %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Địa chỉ</th>
+                    <td>
+                        <%= sinhvien.diaChi || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <%= sinhvien.email || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Số điện thoại</th>
+                    <td>
+                        <%= sinhvien.sdt || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Khoa</th>
+                    <td>
+                        <%= sinhvien.lop?.khoa?.tenKhoa || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ngành</th>
+                    <td>
+                        <%= sinhvien.nganh?.tenNganh || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Lớp</th>
+                    <td>
+                        <%= sinhvien.lop?.tenLop || '—' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Khoá học</th>
+                    <td>
+                        <%= sinhvien.lop?.khoaHoc?.tenKhoaHoc || '—' %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Thao tác</th>
+                    <td>
+                        <a href="/sinhvien/sua/<%= sinhvien._id %>" class="btn btn-sm btn-warning">Sửa
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a href="/sinhvien/xoa/<%= sinhvien._id %>" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Xoá sinh viên này?');">Xoá
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/sinhvien" class="btn btn-secondary mt-3">Quay lại danh sách</a>
+    </div>
+
+    <%- include('footer') %>

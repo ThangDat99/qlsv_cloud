@@ -1,0 +1,28 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2>Cập nhật học kỳ</h2>
+        <form action="/hocky/sua/<%= hocKy._id %>" method="POST">
+            <div class="mb-3">
+                <label for="tenHocKy" class="form-label">Tên học kỳ</label>
+                <input type="text" class="form-control" id="tenHocKy" name="tenHocKy" required
+                    value="<%= hocKy.tenHocKy %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="khoaHoc" class="form-label">Khóa học</label>
+                <select name="khoaHoc" id="khoaHoc" class="form-select" required>
+                    <% khoahocs.forEach(k=> { %>
+                        <option value="<%= k._id %>" <%=hocKy.khoaHoc.equals(k._id) ? 'selected' : '' %>><%=
+                                k.tenKhoaHoc %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <a href="/hocky" class="btn btn-secondary ms-2">Huỷ</a>
+        </form>
+    </div>
+
+    <%- include('footer') %>

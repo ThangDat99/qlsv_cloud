@@ -1,0 +1,52 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Sửa Lớp</h2>
+        <form action="/lop/sua/<%= lop._id %>" method="POST">
+            <div class="mb-3">
+                <label for="tenLop" class="form-label">Tên lớp</label>
+                <input type="text" class="form-control" id="tenLop" name="tenLop" value="<%= lop.tenLop %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select class="form-select" id="khoa" name="khoa" required>
+                    <% khoas.forEach(function(khoa) { %>
+                        <option value="<%= khoa._id %>" <%=lop.khoa.equals(khoa._id) ? 'selected' : '' %>>
+                            <%= khoa.tenKhoa %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="nganh" class="form-label">Ngành</label>
+                <select id="nganh" name="nganh" class="form-select" required>
+                    <option value="">-- Chọn ngành --</option>
+                    <% nganhs.forEach(function(nganh) { %>
+                        <option value="<%= nganh._id %>" <%=lop.nganh && lop.nganh.toString()===nganh._id.toString()
+                            ? 'selected' : '' %>>
+                            <%= nganh.tenNganh %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="khoaHoc" class="form-label">Khoá học</label>
+                <select class="form-select" id="khoaHoc" name="khoaHoc" required>
+                    <% khoahocs.forEach(function(khoaHoc) { %>
+                        <option value="<%= khoaHoc._id %>" <%=lop.khoaHoc && lop.khoaHoc.equals(khoaHoc._id)
+                            ? 'selected' : '' %>>
+                            <%= khoaHoc.tenKhoaHoc %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <a href="/lop" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

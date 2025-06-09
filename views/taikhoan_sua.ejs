@@ -1,0 +1,56 @@
+<%- include('header')%>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-primary">
+            <%= title %>
+        </h2>
+
+        <% if (message) { %>
+            <div class="alert"><%- message %></div>
+            <% } %>
+
+                <form method="POST" action="/taikhoan/sua/<%= account._id %>">
+                    <div class="mb-3">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" name="HoVaTen" value="<%= account.HoVaTen %>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="Email" value="<%= account.Email || '' %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="TenDangNhap" value="<%= account.TenDangNhap %>"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu mới (để trống nếu không đổi)</label>
+                        <input type="password" class="form-control" name="MatKhau">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu hiện tại (nếu đổi mật khẩu)</label>
+                        <input type="password" class="form-control" name="MatKhauCu">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Quyền hạn</label>
+                        <select class="form-select" name="QuyenHan">
+                            <option value="user" <%=account.QuyenHan==='user' ? 'selected' : '' %>>User</option>
+                            <option value="admin" <%=account.QuyenHan==='admin' ? 'selected' : '' %>>Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="KichHoat" id="kichhoat" value="1"
+                            <%=account.KichHoat ? 'checked' : '' %>>
+                        <label class="form-check-label" for="kichhoat">Kích hoạt tài khoản</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    <a href="/taikhoan" class="btn btn-secondary">Quay lại</a>
+                </form>
+    </div>
+    <%- include('footer') %>

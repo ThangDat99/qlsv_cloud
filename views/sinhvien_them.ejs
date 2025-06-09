@@ -1,0 +1,106 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Thêm sinh viên</h2>
+        <form action="/sinhvien/them" method="POST" class="mt-4">
+
+            <div class="mb-3">
+                <label for="maSV" class="form-label">Mã sinh viên</label>
+                <input type="text" class="form-control" id="maSV" name="maSV" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="hoTen" class="form-label">Họ và tên</label>
+                <input type="text" class="form-control" id="hoTen" name="hoTen" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Giới tính</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioiTinh" id="nam" value="Nam" required>
+                        <label class="form-check-label" for="nam">Nam</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gioiTinh" id="nu" value="Nữ" required>
+                        <label class="form-check-label" for="nu">Nữ</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ngaySinh" class="form-label">Ngày sinh</label>
+                <input type="date" class="form-control" id="ngaySinh" name="ngaySinh" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="diaChi" class="form-label">Địa chỉ</label>
+                <input type="text" class="form-control" id="diaChi" name="diaChi">
+            </div>
+
+            <!-- Chọn khoá học-->
+            <div class="mb-3">
+                <label for="khoahoc" class="form-label">Khoá học</label>
+                <select id="khoahoc" name="khoahoc" class="form-select" required>
+                    <option value="">-- Chọn khoá học --</option>
+                    <% khoahocs.forEach(function(khoahoc) { %>
+                        <option value="<%= khoahoc._id %>">
+                            <%= khoahoc.tenKhoaHoc %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+            <!-- Chọn khoa -->
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select id="khoa" name="khoa" class="form-select" required>
+                    <option value="">-- Chọn khoa --</option>
+                    <% khoas.forEach(function(khoa) { %>
+                        <option value="<%= khoa._id %>">
+                            <%= khoa.tenKhoa %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="nganh" class="form-label">Ngành</label>
+                <select id="nganh" name="nganh" class="form-select" required>
+                    <option value="">-- Chọn ngành --</option>
+                    <% nganhs.forEach(function(nganh) { %>
+                        <option value="<%= nganh._id %>">
+                            <%= nganh.tenNganh %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <!-- Chọn lớp -->
+            <div class="mb-3">
+                <label for="lop" class="form-label">Lớp</label>
+                <select id="lop" name="lop" class="form-select" required>
+                    <option value="">-- Chọn lớp --</option>
+                    <% lops.forEach(function(lop) { %>
+                        <option value="<%= lop._id %>">
+                            <%= lop.tenLop %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+
+            <div class="mb-3">
+                <label for="sdt" class="form-label">Số điện thoại</label>
+                <input type="text" class="form-control" id="sdt" name="sdt">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Thêm sinh viên</button>
+            <a href="/sinhvien" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

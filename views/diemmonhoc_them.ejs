@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+    <div class="container mt-4">
+        <h2>Thêm điểm môn học cho sinh viên: <%= sinhvien.hoTen %>
+        </h2>
+
+        <input type="hidden" id="khoaId" value="<%= sinhvien.khoa ? sinhvien.khoa._id : '' %>">
+
+        <div class="mb-3">
+            <label for="searchMonHoc" class="form-label">Tìm mã môn học</label>
+            <input type="text" id="searchMonHoc" class="form-control" placeholder="Nhập mã môn học...">
+        </div>
+
+        <div id="ketQuaMonHoc"></div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchMonHoc');
+        const ketQuaMonHoc = document.getElementById('ketQuaMonHoc');
+        const khoaId = document.getElementById('khoaId').value;
+
+        searchInput.addEventListener('input', async () => {
+            const keyword = searchInput.value.trim();
+            if (keyword.length === 0) {
+                ketQuaMonHoc.innerHTML = '';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/diemmonhoc/timmonhoc?keyword=${encodeURIComponent(keyword)}&khoaId=${khoaId}`);
+                const monHocs = await res.json();
+
+                if (monHocs.length === 0) {
+                    ketQuaMonHoc.innerHTML = '<p>Không tìm thấy môn học phù hợp.</p>';
+                    return;
+                }
+
+                ketQuaMonHoc.innerHTML = monHocs.map(mon => `
+        <form action="/diemmonhoc/them" method="POST" class="border p-3 rounded mb-3">
+          <input type="hidden" name="sinhvien" value="<%= sinhvien._id %>">
+          <input type="hidden" name="hocKy" value="<%= hocKy._id %>">
+          <input type="hidden" name="monHoc" value="${mon._id}">
+
+          <div><strong>${mon.maMonHoc} - ${mon.tenMonHoc}</strong></div>
+
+          <div class="mb-3">
+            <label>Điểm quá trình</label>
+            <input type="number" name="diemQuaTrinh" min="0" max="10" step="0.01" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label>Điểm thi</label>
+            <input type="number" name="diemThi" min="0" max="10" step="0.01" class="form-control" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Lưu điểm</button>
+        </form>
+      `).join('');
+
+            } catch (error) {
+                console.error(error);
+                ketQuaMonHoc.innerHTML = '<p>Lỗi khi tìm môn học.</p>';
+            }
+        });
+    </script>
+
+    <%- include('footer') %>

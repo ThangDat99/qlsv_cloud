@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2>Thêm môn học</h2>
+        <form action="/monhoc/them" method="POST">
+            <div class="mb-3">
+                <label for="maMonHoc" class="form-label">Mã môn học</label>
+                <input type="text" class="form-control" name="maMonHoc" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="tenMonHoc" class="form-label">Tên môn học</label>
+                <input type="text" class="form-control" name="tenMonHoc" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="soTinChi" class="form-label">Số tín chỉ</label>
+                <input type="text" class="form-control" name="soTinChi" required>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="tyLeGiuaKy" class="form-label">Tỷ lệ giữa kỳ (%)</label>
+                    <input type="number" name="tyLeGiuaKy" class="form-control" value="50" required>
+                </div>
+                <div class="col">
+                    <label for="tyLeCuoiKy" class="form-label">Tỷ lệ cuối kỳ (%)</label>
+                    <input type="number" name="tyLeCuoiKy" class="form-control" value="50" required>
+                </div>
+            </div>
+
+            <!-- Khoa -->
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select class="form-select" name="khoa" id="khoa" required>
+                    <option value="">-- Chọn khoa --</option>
+                    <% khoas.forEach(k=> { %>
+                        <option value="<%= k._id %>">
+                            <%= k.tenKhoa %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <!-- Học kỳ -->
+            <div class="mb-3">
+                <label for="hocKy" class="form-label">Học kỳ</label>
+                <select class="form-select" name="hocKy" id="hocKy" required>
+                    <option value="">-- Chọn học kỳ --</option>
+                    <option value="I">Học kỳ I</option>
+                    <option value="II">Học kỳ II</option>
+                    <option value="III">Học kỳ III</option>
+                    <option value="IV">Học kỳ IV</option>
+                    <option value="V">Học kỳ V</option>
+                    <option value="VI">Học kỳ VI</option>
+                    <option value="VII">Học kỳ VII</option>
+                    <option value="VIII">Học kỳ VIII</option>
+                </select>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Thêm</button>
+            <a href="/monhoc" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+
+    <%- include('footer') %>

@@ -1,0 +1,21 @@
+<%- include('header') %>
+    <div class="container mt-5">
+        <h2>Thêm khóa học</h2>
+        <form action="/khoahoc/them" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Tên khóa học</label>
+                <input type="text" name="tenKhoaHoc" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Năm bắt đầu</label>
+                <input type="number" name="namBatDau" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Năm kết thúc</label>
+                <input type="number" name="namKetThuc" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm</button>
+            <a href="/khoahoc" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

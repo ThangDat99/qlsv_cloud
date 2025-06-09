@@ -1,0 +1,36 @@
+<%- include('header') %>
+
+    <div class="container mt-4">
+        <h2 class="text-primary mb-3">Quản lý khoa</h2>
+        <div class="mb-3">
+            <%- include('nav') %>
+                <a href="/khoa/them" class="btn btn-success mb-3">+ Thêm Khoa</a>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên Khoa</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% khoas.forEach((khoa, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= khoa.tenKhoa %>
+                                </td>
+                                <td>
+                                    <a href="/khoa/sua/<%= khoa._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                    <a href="/khoa/xoa/<%= khoa._id %>" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Bạn chắc chắn muốn xoá?')">Xoá</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+        </div>
+        <%- include('footer') %>

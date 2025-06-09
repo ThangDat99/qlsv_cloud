@@ -1,0 +1,23 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h3>Sửa điểm môn học</h3>
+        <form method="post" action="/diemmonhoc/sua/<%= diem._id %>">
+            <div class="mb-3">
+                <label>Môn học:</label>
+                <input type="text" class="form-control" value="<%= diem.monHoc.tenMonHoc %>" disabled>
+            </div>
+            <div class="mb-3">
+                <label>Điểm quá trình:</label>
+                <input type="number" step="0.1" min="0" max="10" class="form-control" name="diemQuaTrinh"
+                    value="<%= diem.diemQuaTrinh %>" required>
+            </div>
+            <div class="mb-3">
+                <label>Điểm thi:</label>
+                <input type="number" step="0.1" min="0" max="10" class="form-control" name="diemThi"
+                    value="<%= diem.diemThi %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a href="/diemmonhoc?sinhvienId=<%= diem.sinhvien._id %>" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

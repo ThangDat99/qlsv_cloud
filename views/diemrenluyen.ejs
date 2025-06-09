@@ -1,0 +1,80 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h3 class="mb-3">Danh sách điểm rèn luyện</h3>
+        <%- include('nav') %>
+            <form class="mb-3" method="GET" action="/diemrenluyen">
+                <div class="input-group col-md-16">
+                    <input type="text" name="maSV" class="form-control" placeholder="Nhập mã số sinh viên"
+                        value="<%= query.maSV || '' %>">
+                    <button type="submit" class="btn btn-primary">Tìm</button>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>MSSV</th>
+                        <th>Học kỳ</th>
+                        <th>Điểm rèn luyện</th>
+                        <th>Xếp loại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% sinhviens.forEach((sv, i)=> {
+                        const khoaHocId = sv.khoaHoc ? sv.khoaHoc._id.toString() : null;
+                        const hocKyOptions = khoaHocId ? hocKyTheoKhoaHoc[khoaHocId] || [] : [];
+                        const selectedHocKyId = query['hocKyId_' + sv._id] || '';
+                        const diem = allDiemRL.find(d =>
+                        d.sinhvien._id.toString() === sv._id.toString() &&
+                        d.hocKy._id.toString() === selectedHocKyId
+                        );
+                        %>
+                        <tr>
+                            <td>
+                                <%= i + 1 %>
+                            </td>
+                            <td>
+                                <%= sv.maSV %>
+                            </td>
+                            <td>
+                                <form method="GET" action="/diemrenluyen">
+                                    <% if (query.maSV) { %>
+                                        <input type="hidden" name="maSV" value="<%= query.maSV %>">
+                                        <% } %>
+                                            <select name="hocKyId_<%= sv._id %>" onchange="this.form.submit()"
+                                                class="form-select">
+                                                <option value="">-- Chọn học kỳ --</option>
+                                                <% hocKyOptions.forEach(hk=> { %>
+                                                    <option value="<%= hk._id %>" <%=selectedHocKyId===hk._id.toString()
+                                                        ? 'selected' : '' %>>
+                                                        <%= hk.tenHocKy %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                </form>
+                            </td>
+                            <td>
+                                <%= diem ? diem.diem : '—' %>
+                            </td>
+                            <td>
+                                <%= diem ? diem.xepLoai : '' %>
+                            </td>
+                            <td>
+                                <% if (diem) { %>
+                                    <a href="/diemrenluyen/sua/<%= diem._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                    <form method="POST" action="/diemrenluyen/xoa/<%= diem._id %>" class="d-inline">
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Xoá?')">Xoá</button>
+                                    </form>
+                                    <% } else if (selectedHocKyId) { %>
+                                        <a href="/diemrenluyen/them?sinhvienId=<%= sv._id %>&hocKyId=<%= selectedHocKyId %>"
+                                            class="btn btn-success btn-sm">Thêm</a>
+                                        <% } %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+    </div>
+    <%- include('footer') %>

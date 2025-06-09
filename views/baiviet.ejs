@@ -1,0 +1,46 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h2 class="mb-4">Danh sách bài viết</h2>
+        <a href="/baiviet/them" class="btn btn-success mb-3">
+            <i class="bi bi-plus-circle"></i> Thêm bài viết
+        </a>
+        <div class="row">
+            <% baiViets.forEach(bv=> { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <% if (bv.hinhAnh) { %>
+                            <img src="<%= bv.hinhAnh %>" alt="<%= bv.tieuDe %>" class="img-fluid"
+                                style="max-width: 200px;">
+
+                            <% } %>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">
+                                        <%= bv.tieuDe %>
+                                    </h5>
+                                    <p class="card-text">
+                                        <%= bv.moTaNgan %>
+                                    </p>
+                                    <div class="mt-auto d-flex flex-wrap gap-2 align-middle">
+                                        <a href="/baiviet/<%= bv._id %>" class="btn btn-primary btn-sm">
+                                            <i class="bi bi-eye"></i> Xem
+                                        </a>
+                                        <a href="/baiviet/sua/<%= bv._id %>" class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Sửa
+                                        </a>
+                                        <form action="/baiviet/xoa/<%= bv._id %>" method="POST"
+                                            onsubmit="return confirm('Bạn có chắc muốn xoá?')">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <%= new Date(bv.ngayDang).toLocaleDateString('vi-VN') %>
+                                </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+    <%- include('footer') %>

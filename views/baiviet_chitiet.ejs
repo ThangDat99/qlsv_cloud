@@ -1,0 +1,26 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h2>
+            <%= baiViet.tieuDe %>
+        </h2>
+        <p class="text-muted">
+            Ngày đăng: <%= new Date(baiViet.ngayDang).toLocaleDateString('vi-VN') %>
+        </p>
+
+        <% if (baiViet.moTaNgan) { %>
+            <p class="lead">
+                <%= baiViet.moTaNgan %>
+            </p>
+            <% } %>
+
+                <% if (baiViet.hinhAnh) { %>
+                    <img src="<%= baiViet.hinhAnh %>" alt="<%= baiViet.tieuDe %>" class="img-fluid mb-3">
+                    <% } %>
+
+                        <p>
+                            <%= baiViet.noiDung %>
+                        </p>
+
+                        <a href="/" class="btn btn-secondary mt-3">Quay lại</a>
+    </div>
+    <%- include('footer') %>

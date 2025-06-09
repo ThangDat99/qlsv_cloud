@@ -1,0 +1,21 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Sửa Khoa</h2>
+        <form action="/khoa/sua/<%= khoa._id %>" method="POST">
+            <div class="mb-3">
+                <label for="maKhoa" class="form-label">Mã khoa</label>
+                <input type="text" class="form-control" id="maKhoa" name="maKhoa" value="<%= khoa.maKhoa %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="tenKhoa" class="form-label">Tên khoa</label>
+                <input type="text" class="form-control" id="tenKhoa" name="tenKhoa" value="<%= khoa.tenKhoa %>"
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <a href="/khoa" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

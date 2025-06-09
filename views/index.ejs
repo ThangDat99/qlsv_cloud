@@ -1,0 +1,31 @@
+<%- include('header') %>
+
+    <div class="container my-4">
+        <h2 class="mb-4">Sự kiện</h2>
+        <div class="list-group">
+            <% baiviet.forEach(bv=> { %>
+                <a href="/baiviet/<%= bv._id %>"
+                    class="list-group-item list-group-item-action d-flex align-items-center">
+                    <% if (bv.hinhAnh) { %>
+                        <img src="<%= bv.hinhAnh %>" alt="<%= bv.tieuDe %>"
+                            style="width: 150px; height: 100px; object-fit: cover; margin-right: 15px;">
+                        <% } else { %>
+                            <div style="width: 150px; height: 100px; background-color: #eee; margin-right: 15px;"></div>
+                            <% } %>
+                                <div>
+                                    <h5 class="mb-1">
+                                        <%= bv.tieuDe %>
+                                    </h5>
+                                    <p class="mb-1 text-truncate" style="max-width: 600px;">
+                                        <%= bv.moTaNgan || '' %>
+                                    </p>
+                                    <small>Ngày đăng: <%= new Date(bv.ngayDang).toLocaleDateString('vi-VN') %></small>
+                                </div>
+                </a>
+                <% }) %>
+        </div>
+    </div>
+
+    <div id="map" style="margin-top: 200px; margin-bottom: -150px;"></div>
+
+    <%- include('footer') %>

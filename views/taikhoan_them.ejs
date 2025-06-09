@@ -1,0 +1,41 @@
+<%- include('header')%>
+
+    <div class="container mt-4">
+        <h3>➕ Thêm tài khoản</h3>
+        <form action="/taikhoan/them" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Họ và tên</label>
+                <input type="text" name="HoVaTen" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="Email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tên đăng nhập</label>
+                <input type="text" name="TenDangNhap" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" name="MatKhau" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quyền hạn</label>
+                <select name="QuyenHan" class="form-select">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Kích hoạt</label>
+                <select name="KichHoat" class="form-select">
+                    <option value="1">Kích hoạt</option>
+                    <option value="0">Chưa kích hoạt</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">💾 Lưu</button>
+            <a href="/taikhoan" class="btn btn-secondary">🔙 Quay lại</a>
+        </form>
+    </div>
+
+    <%- include('footer') %>

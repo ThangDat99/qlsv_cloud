@@ -1,0 +1,66 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2>Sửa môn học</h2>
+        <form action="/monhoc/sua/<%= monHoc._id %>" method="POST">
+            <div class="mb-3">
+                <label for="maMonHoc" class="form-label">Mã môn học</label>
+                <input type="text" class="form-control" name="maMonHoc" value="<%= monHoc.maMonHoc %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="tenMonHoc" class="form-label">Tên môn học</label>
+                <input type="text" class="form-control" name="tenMonHoc" value="<%= monHoc.tenMonHoc %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="soTinChi" class="form-label">Số tín chỉ</label>
+                <input type="text" class="form-control" name="soTinChi" required>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="tyLeGiuaKy" class="form-label">Tỷ lệ giữa kỳ (%)</label>
+                    <input type="number" name="tyLeGiuaKy" class="form-control" value="40" required>
+                </div>
+
+                <div class="col">
+                    <label for="tyLeCuoiKy" class="form-label">Tỷ lệ cuối kỳ (%)</label>
+                    <input type="number" name="tyLeCuoiKy" class="form-control" value="60" required>
+                </div>
+            </div>
+
+            <!-- Khoa -->
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select class="form-select" name="khoa" id="khoa" required>
+                    <option value="">-- Chọn khoa --</option>
+                    <% khoas.forEach(k=> { %>
+                        <option value="<%= k._id %>" <%=monHoc.khoa && monHoc.khoa._id.toString()===k._id.toString()
+                            ? 'selected' : '' %>>
+                            <%= k.tenKhoa %>
+                        </option>
+                        <% }) %>
+                </select>
+
+            </div>
+
+            <!-- Học kỳ -->
+            <div class="mb-3">
+                <label for="hocKy" class="form-label">Học kỳ</label>
+                <select class="form-select" name="hocKy" id="hocKy" required>
+                    <option value="">-- Chọn học kỳ --</option>
+                    <% hockys.forEach(hk=> { %>
+                        <option value="<%= hk %>" <%=monHoc.hocKy===hk ? 'selected' : '' %>>
+                            Học kỳ <%= hk %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a href="/monhoc" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+
+    <%- include('footer') %>

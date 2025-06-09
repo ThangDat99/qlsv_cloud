@@ -1,0 +1,29 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h2>Thêm bài viết</h2>
+        <form action="/baiviet/them" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="tieuDe" class="form-label">Tiêu đề</label>
+                <input type="text" class="form-control" name="tieuDe" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="moTaNgan" class="form-label">Mô tả ngắn</label>
+                <textarea class="form-control" name="moTaNgan" rows="2"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="noiDung" class="form-label">Nội dung</label>
+                <textarea class="form-control" name="noiDung" rows="6"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="hinhAnh" class="form-label">Hình ảnh</label>
+                <input type="file" class="form-control" name="hinhAnh" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu bài viết</button>
+            <a href="/baiviet" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+    <%- include('footer') %>

@@ -1,0 +1,34 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <div class="mb-3">
+            <h2 class="text-primary mb-3">Danh sách ngành</h2>
+            <%- include('nav') %>
+                <a href="/nganh/them" class="btn btn-success mb-3">+ Thêm ngành</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên ngành</th>
+                            <th>Khoa</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% nganhs.forEach(nganh=> { %>
+                            <tr>
+                                <td>
+                                    <%= nganh.tenNganh %>
+                                </td>
+                                <td>
+                                    <%= nganh.khoa?.tenKhoa %>
+                                </td>
+                                <td>
+                                    <a href="/nganh/sua/<%= nganh._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                    <a href="/nganh/xoa/<%= nganh._id %>" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Xoá ngành này?')">Xoá</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+        </div>
+        <%- include('footer') %>

@@ -1,0 +1,46 @@
+<%- include('header') %>
+
+    <div class="container mt-4">
+        <h2 class="text-primary mb-3">Quản lý khoá học</h2>
+        <%- include('nav') %>
+            <a href="/khoahoc/them" class="btn btn-success mb-3">+ Thêm khóa học</a>
+
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên khóa học</th>
+                        <th>Năm bắt đầu</th>
+                        <th>Năm kết thúc</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% khoahocs.forEach((khoa, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                                <%= khoa.tenKhoaHoc %>
+                            </td>
+                            <td>
+                                <%= khoa.namBatDau %>
+                            </td>
+                            <td>
+                                <%= khoa.namKetThuc %>
+                            </td>
+                            <td>
+                                <a href="/khoahoc/sua/<%= khoa._id %>" class="btn btn-sm btn-warning">Sửa</a>
+                                <form action="/khoahoc/xoa/<%= khoa._id %>" method="POST" class="d-inline"
+                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa khóa học này?');">
+                                    <button class="btn btn-sm btn-danger" type="submit">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+    </div>
+
+    <%- include('footer') %>

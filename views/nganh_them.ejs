@@ -1,0 +1,28 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h2>Thêm ngành</h2>
+        <form action="/nganh/them" method="POST">
+            <div class="mb-3">
+                <label for="maNganh" class="form-label">Mã ngành</label>
+                <input type="text" class="form-control" name="maNganh" id="maNganh" required>
+            </div>
+            <div class="mb-3">
+                <label for="tenNganh" class="form-label">Tên ngành</label>
+                <input type="text" class="form-control" id="tenNganh" name="tenNganh" required>
+            </div>
+            <div class="mb-3">
+                <label for="khoa" class="form-label">Khoa</label>
+                <select class="form-select" name="khoa" id="khoa" required>
+                    <option value="">-- Chọn khoa --</option>
+                    <% khoas.forEach(khoa=> { %>
+                        <option value="<%= khoa._id %>">
+                            <%= khoa.tenKhoa %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm</button>
+            <a href="/nganh" class="btn btn-secondary ms-2">Huỷ</a>
+        </form>
+    </div>
+    <%- include('footer') %>

@@ -1,0 +1,58 @@
+<%- include('header') %>
+
+    <div class="container mt-4">
+        <h2 class="text-primary mb-3">Quản lý môn học</h2>
+        <%- include('nav') %>
+            <form action="/monhoc" method="GET" class="d-flex mb-3">
+                <input type="text" name="q" class="form-control me-2" placeholder="Nhập mã môn học..."
+                    value="<%= typeof q !== 'undefined' ? q : '' %>">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
+            <a href="/monhoc/them" class="btn btn-success mb-3">+ Thêm môn học</a>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã môn học</th>
+                        <th>Tên môn học</th>
+                        <th>Số tín chỉ</th>
+                        <th>Thuộc khoa</th>
+                        <th>Học kỳ</th>
+                        <th>Tỷ lệ GK/CK</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% monHocs.forEach(mon=> { %>
+                        <tr>
+                            <td>
+                                <%= mon.maMonHoc %>
+                            </td>
+                            <td>
+                                <%= mon.tenMonHoc %>
+                            </td>
+                            <td>
+                                <%= mon.soTinChi? mon.soTinChi : '-' %>
+                            </td>
+                            <td>
+                                <%= mon.khoa ? mon.khoa.tenKhoa : '—' %>
+                            </td>
+                            <td>
+                                <%= mon.hocKy ? `Học kỳ ${mon.hocKy}` : '—' %>
+                            </td>
+                            <td>
+                                <%= (mon.tyLeGiuaKy * 100).toFixed(0) %>% / <%= (mon.tyLeCuoiKy * 100).toFixed(0) %>%
+                            </td>
+                            <td>
+                                <a href="/monhoc/sua/<%= mon._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                <form action="/monhoc/xoa/<%= mon._id %>" method="POST" class="d-inline">
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+    </div>
+
+    <%- include('footer') %>

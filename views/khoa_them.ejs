@@ -1,0 +1,19 @@
+<%- include('header') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Thêm khoa</h2>
+        <form action="/khoa/them" method="POST">
+            <div class="mb-3">
+                <label for="maKhoa" class="form-label">Mã khoa</label>
+                <input type="text" class="form-control" id="maKhoa" name="maKhoa" required>
+            </div>
+            <div class="mb-3">
+                <label for="tenKhoa" class="form-label">Tên khoa</label>
+                <input type="text" class="form-control" id="tenKhoa" name="tenKhoa" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm</button>
+            <a href="/khoa" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+
+    </div>
+    <%- include('footer') %>

@@ -1,0 +1,35 @@
+<%- include('header') %>
+    <div class="container mt-4">
+        <h2 class="text-primary mb-3">Quản lý học kỳ</h2>
+        <%- include('nav') %>
+            <a href="/hocky/them" class="btn btn-success mb-3">+ Thêm học kỳ</a>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Tên học kỳ</th>
+                        <th>Khoá học</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% hocKys.forEach(hk=> { %>
+                        <tr>
+                            <td>
+                                <%= hk.tenHocKy %>
+                            </td>
+                            <td>
+                                <%= hk.khoaHoc ? hk.khoaHoc.tenKhoaHoc : '—' %>
+                            </td>
+                            <td>
+                                <a href="/hocky/sua/<%= hk._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                <form action="/hocky/xoa/<%= hk._id %>" method="POST" class="d-inline">
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Bạn có chắc muốn xoá?')">Xoá</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+    </div>
+    <%- include('footer') %>
