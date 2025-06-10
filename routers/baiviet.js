@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const BaiViet = require('../models/baiviet');
 const { ensureAuthenticated } = require('../middlewares/auth')
-
 const multer = require('multer');
 const path = require('path');
 const { title } = require('process');
@@ -18,7 +17,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// Bộ lọc file: chỉ cho phép ảnh
+// Bộ lọc
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());

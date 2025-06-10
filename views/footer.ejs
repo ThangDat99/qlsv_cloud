@@ -3,41 +3,9 @@
         <div class="container p-4">
             <p class="text-center">&copy; Nguyễn Thắng Đạt_DTH225625 - 2025 Phòng Công tác Sinh viên - Trường Đại học An
                 Giang</p>
-            <div class="container mt-2 d-flex justify-content-center gap-2">
-                <button onclick="setSeason('spring')" class="btn btn-outline-success btn-sm">Xuân</button>
-                <button onclick="setSeason('summer')" class="btn btn-outline-warning btn-sm">Hạ</button>
-                <button onclick="setSeason('autumn')" class="btn btn-outline-danger btn-sm">Thu</button>
-                <button onclick="setSeason('winter')" class="btn btn-outline-primary btn-sm">Đông</button>
-                <button onclick="setSeason('default')" class="btn btn-outline-secondary btn-sm">Mặc định</button>
-            </div>
         </div>
     </footer>
 </div>
-<script>
-
-    function setSeason(season) {
-        document.body.classList.remove('spring', 'summer', 'autumn', 'winter');
-        document.body.classList.add(season);
-        localStorage.setItem('selectedSeason', season);
-
-        if (season === 'winter') {
-            if (!window.snowInterval) {
-                window.snowInterval = setInterval(createSnowflake, 200);
-            }
-        } else {
-            clearInterval(window.snowInterval);
-            window.snowInterval = null;
-            document.querySelectorAll('.snowflake').forEach(el => el.remove());
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedSeason = localStorage.getItem('selectedSeason');
-        if (savedSeason) {
-            setSeason(savedSeason);
-        }
-    });
-</script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>

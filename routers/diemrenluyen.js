@@ -56,7 +56,7 @@ router.post('/them', async (req, res) => {
   try {
     const { sinhvien, hocKy, diem } = req.body;
     if (diem >= 90) xepLoai = 'Xuất sắc';
-else if (diem >= 80) xepLoai = 'Tốt';
+else if (diem >= 80) xepLoai = 'Giỏi';
 else if (diem >= 65) xepLoai = 'Khá';
 else if (diem >= 50) xepLoai = 'Trung bình';
 else xepLoai = 'Yếu';
